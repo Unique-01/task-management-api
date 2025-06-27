@@ -3,6 +3,7 @@ require("./config/mongoose.js");
 const express = require("express");
 
 const userRouter = require("./routes/userRoutes.js");
+const taskRouter = require("./routes/taskRoutes.js");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/user", userRouter);
+app.use("/api/tasks", taskRouter);
 
 app.listen(PORT, () =>
     console.log(`Server has started running on PORT ${PORT}`)

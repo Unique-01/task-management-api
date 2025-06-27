@@ -2,6 +2,12 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 
 const registerUser = async (req, res) => {
+    if (!req.body || typeof req.body !== "object") {
+        return res
+            .status(400)
+            .send({ error: "Invalid or missing request body" });
+    }
+
     const { username, password } = req.body;
     const userExists = await User.findOne({ username });
 
@@ -24,6 +30,12 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+    if (!req.body || typeof req.body !== "object") {
+        return res
+            .status(400)
+            .send({ error: "Invalid or missing request body" });
+    }
+
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
@@ -55,4 +67,4 @@ const profile = async (req, res) => {
     res.status(200).send(req.user);
 };
 
-module.exports = { registerUser, loginUser,profile };
+module.exports = { registerUser, loginUser, profile };
